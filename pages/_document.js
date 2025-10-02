@@ -1,0 +1,15 @@
+// pages/_document.js
+import { Html, Head, Main, NextScript } from 'next/document'
+
+export default function Document() {
+  return (
+    <Html lang="ar" dir="rtl">
+      <link rel="icon" href="/images/logo-sec.png" />
+      <Head />
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
