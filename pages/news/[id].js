@@ -18,7 +18,7 @@ export default function NewsyDetail() {
     const fetchNewsItem = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/news/${id}`);
+        const res = await fetch(`http://localhost/abarhail-api/api/v1/news/${id}`);
         if (!res.ok) throw new Error('Failed to fetch news item');
         const data = await res.json();
         setItem(data.data); // <-- pass the "data" object from API response

@@ -24,7 +24,7 @@ export default function Products() {
         let hasNext = true;
 
         while (hasNext) {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?page=${page}`);
+          const response = await fetch(`http://localhost/abarhail-api/api/v1/products?page=${page}`);
           if (!response.ok) throw new Error(`Failed to fetch page ${page}`);
           const data = await response.json();
 

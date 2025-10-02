@@ -18,7 +18,7 @@ export default function SocialyDetail() {
     const fetchSocialItem = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/social/${id}`);
+        const res = await fetch(`http://localhost/abarhail-api/api/v1/social/${id}`);
         if (!res.ok) throw new Error('Failed to fetch social item');
         const data = await res.json();
         setItem(data.data); // <-- pass the "data" object from API response

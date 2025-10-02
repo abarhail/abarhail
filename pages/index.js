@@ -27,8 +27,8 @@ export default function Home({ products, news }) {
 export async function getStaticProps() {
   try {
     const [productsRes, newsRes] = await Promise.all([
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`),
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/news`)
+      fetch(`http://localhost/abarhail-api/api/v1/products`),
+      fetch(`http://localhost/abarhail-api/api/v1/news`)
     ]);
 
     const [products, news] = await Promise.all([
