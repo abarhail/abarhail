@@ -1,30 +1,9 @@
 // pages/[...slug].js
-import { useRouter } from 'next/router';
 import Quality from './quality';
 import About from './about';
 import SocialResponsibility from './social-responsibility';
 import News from './news';
 import Products from './products';
-
-export default function SlugPage({ news, social }) {
-  const { query } = useRouter();
-  const slug = query.slug?.[0];
-
-  switch (slug) {
-    case 'الجودة':
-      return <Quality />;
-    case 'عن-آبار-حائل':
-      return <About />;
-    case 'المسؤولية-الاجتماعية':
-      return <SocialResponsibility social={social} />;
-    case 'الأخبار':
-      return <News news={news} />;
-    case 'المنتجات':
-      return <Products />;
-    default:
-      return <div>Page not found</div>;
-  }
-}
 
 // Helper to fetch all pages for a given endpoint
 async function fetchAllPages(endpoint) {
@@ -44,7 +23,26 @@ async function fetchAllPages(endpoint) {
   return allItems;
 }
 
-export async function getServerSideProps() {
+export default function SlugPage({ news, social, slug }) {
+  switch (slug) {
+    case 'الجودة':
+      return <Quality />;
+    case 'عن-آبار-حائل':
+      return <About />;
+    case 'المسؤولية-الاجتماعية':
+      return <SocialResponsibility social={social} />;
+    case 'الأخبار':
+      return <News news={news} />;
+    case 'المنتجات':
+      return <Products />;
+    default:
+      return <div>Page not found</div>;
+  }
+}
+
+export async function getStaticProps({ params }) {
+  const slug = params.slug?.[0] ?? null;
+
   try {
     const [news, social] = await Promise.all([
       fetchAllPages('news'),
@@ -52,10 +50,36 @@ export async function getServerSideProps() {
     ]);
 
     return {
-      props: { news, social },
+      props: {
+        news,
+        social,
+        slug
+      },
+      // Revalidate the page every 60 seconds
+      revalidate: 3600,
     };
   } catch (err) {
     console.error("❌ Failed to fetch data:", err);
-    return { props: { news: [], social: [] } };
+    return {
+      props: {
+        news: [],
+        social: [],
+        slug
+      },
+      revalidate: 60,
+    };
   }
+}
+
+export async function getStaticPaths() {
+  // Pre-render known slugs at build time
+  const paths = [
+    { params: { slug: ['الجودة'] } },
+    { params: { slug: ['عن-آبار-حائل'] } },
+    { params: { slug: ['المسؤولية-الاجتماعية'] } },
+    { params: { slug: ['الأخبار'] } },
+    { params: { slug: ['المنتجات'] } },
+  ];
+
+  return { paths, fallback: 'blocking' };
 }
