@@ -8,7 +8,7 @@ async function fetchAllPages(endpoint) {
   let hasNext = true;
 
   while (hasNext) {
-    const res = await fetch(`http://localhost/abarhail-api/api/v1/${endpoint}?page=${page}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${endpoint}?page=${page}`);
     if (!res.ok) {
       console.error(`Failed to fetch page ${page} of ${endpoint}`);
       break;
