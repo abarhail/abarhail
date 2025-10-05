@@ -12,7 +12,7 @@ async function fetchAllPages(endpoint) {
   let hasNext = true;
 
   while (hasNext) {
-    const res = await fetch(`http://admin.abarhail.com/abarhail-api/api/v1/${endpoint}?page=${page}`);
+    const res = await fetch(`https://admin.abarhail.com/abarhail-api/api/v1/${endpoint}?page=${page}`);
     const data = await res.json();
 
     allItems = allItems.concat(data?.data?.items ?? []);
