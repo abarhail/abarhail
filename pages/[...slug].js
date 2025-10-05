@@ -12,7 +12,7 @@ async function fetchAllPages(endpoint) {
   let hasNext = true;
 
   while (hasNext) {
-    const res = await fetch(`http://localhost/abarhail-api/api/v1/${endpoint}?page=${page}`);
+    const res = await fetch(`http://admin.abarhail.com/abarhail-api/api/v1/${endpoint}?page=${page}`);
     const data = await res.json();
 
     allItems = allItems.concat(data?.data?.items ?? []);
@@ -23,7 +23,7 @@ async function fetchAllPages(endpoint) {
   return allItems;
 }
 
-export default function SlugPage({ news, social, slug }) {
+export default function SlugPage({ news, social, products, slug }) {
   switch (slug) {
     case 'الجودة':
       return <Quality />;
@@ -34,7 +34,7 @@ export default function SlugPage({ news, social, slug }) {
     case 'الأخبار':
       return <News news={news} />;
     case 'المنتجات':
-      return <Products />;
+      return <Products products={products} />;
     default:
       return <div>Page not found</div>;
   }
@@ -44,18 +44,20 @@ export async function getStaticProps({ params }) {
   const slug = params.slug?.[0] ?? null;
 
   try {
-    const [news, social] = await Promise.all([
+    const [news, social, products] = await Promise.all([
       fetchAllPages('news'),
-      fetchAllPages('social')
+      fetchAllPages('social'),
+      fetchAllPages('products')
     ]);
 
     return {
       props: {
         news,
         social,
+        products,
         slug
       },
-      // Revalidate the page every 60 seconds
+      // Revalidate the page every hour
       revalidate: 3600,
     };
   } catch (err) {
@@ -64,9 +66,10 @@ export async function getStaticProps({ params }) {
       props: {
         news: [],
         social: [],
+        products: [],
         slug
       },
-      revalidate: 60,
+      revalidate: 3600,
     };
   }
 }
