@@ -9,7 +9,8 @@ export const content = {
       certification: "Certification",
       socialResponsibility: "Social Responsibility",
       news: "News",
-      products: "Products"
+      products: "Products",
+      blogs:"blogs"
     },
     ar: {
       home: "الرئيسية",
@@ -18,7 +19,8 @@ export const content = {
       certification: "الشهادات",
       socialResponsibility: "المسؤولية الاجتماعية",
       news: "الأخبار",
-      products: "المنتجات"
+      products: "المنتجات",
+      blogs:"المقالات"
     }
   },
 

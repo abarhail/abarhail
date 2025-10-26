@@ -60,7 +60,8 @@ about: "/about",
 quality: "/quality",
 socialResponsibility: "/social-responsibility",
 news: "/news",
-products: "/products"
+products: "/products",
+blogs: "/blogs"
 },
 ar: {
 home: "/",
@@ -68,7 +69,8 @@ about: "/عن-آبار-حائل",
 quality: "/الجودة",
 socialResponsibility: "/المسؤولية-الاجتماعية",
 news: "/الأخبار",
-products: "/المنتجات"
+products: "/المنتجات",
+blogs:"/المقالات"
 }
 },
 
