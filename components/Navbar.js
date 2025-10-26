@@ -58,7 +58,7 @@ const Navbar = ({ specialClass = "" }) => {
           <li><Link href={getNavLink("products")}>{t("navigation.products")}</Link></li>
           <li><Link href={getNavLink("socialResponsibility")}>{t("navigation.socialResponsibility")}</Link></li>
           <li><Link href={getNavLink("news")}>{t("navigation.news")}</Link></li>
-          <li><Link href={getNavLink("blogs")}>{t("navigation.blogs")}</Link></li>
+          {/* <li><Link href={getNavLink("blogs")}>{t("navigation.blogs")}</Link></li> */}
 
           {/* ✅ Dynamically added published pages */}
           {pages.map((page) => (
