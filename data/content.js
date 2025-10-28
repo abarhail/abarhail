@@ -10,7 +10,7 @@ export const content = {
       socialResponsibility: "Social Responsibility",
       news: "News",
       products: "Products",
-      blogs:"blogs"
+      blogs:"Blogs"
     },
     ar: {
       home: "الرئيسية",
