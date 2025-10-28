@@ -4,7 +4,7 @@ import About from './about';
 import SocialResponsibility from './social-responsibility';
 import News from './news';
 import Products from './products';
-
+import PagesDetail from './pages/[id]';
 // Helper to fetch all pages for a given endpoint
 async function fetchAllPages(endpoint) {
   let allItems = [];
@@ -27,6 +27,8 @@ export default function SlugPage({ news, social, products, slug }) {
   switch (slug) {
     case 'الجودة':
       return <Quality />;
+    case 'الصفحات':
+      return <PagesDetail />;
     case 'عن-آبار-حائل':
       return <About />;
     case 'المسؤولية-الاجتماعية':
@@ -82,6 +84,7 @@ export async function getStaticPaths() {
     { params: { slug: ['المسؤولية-الاجتماعية'] } },
     { params: { slug: ['الأخبار'] } },
     { params: { slug: ['المنتجات'] } },
+    { params: { slug: ['الصفحات'] } },
   ];
 
   return { paths, fallback: 'blocking' };
